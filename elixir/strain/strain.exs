@@ -21,10 +21,6 @@ defmodule Strain do
   """
   @spec discard(list :: list(any), fun :: ((any) -> boolean)) :: list(any)
   def discard(list, fun) do
-    list |> Enum.reduce([],
-              fn item, acc ->
-                if (fun.(item)), do: acc, else: acc ++ [item]
-              end)
-
+    keep(list, &(! fun.(&1)))
   end
 end
